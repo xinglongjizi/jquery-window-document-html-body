@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$(window)/$(document)/$('html')/$('body')平滑滚动到顶部的梗</title>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        *{padding: 0;margin: 0;}
+        html,body{height:200%;background:#eee;text-align:center;}
+        h2{color:maroon;padding-bottom:12px;padding-left:240px;text-align:left;font-weight:normal;}
+        button{position:fixed;top:72%;right:24px;}
+    </style>
+</head>
+<body>
+
+    <h2>$(window)、$(document)、$('html')、$('body')永远是个梗</h2>
+
+    <h2>$(window) $(document) $('html') $('body')平滑滚动到浏览器顶部，或者说任意其他位置的梗</h2>
+
+    <h2>$(obj).animate({scrollTop:0},700);</h2>
+
+    <h2>
+        firefox浏览器：<br>
+        $(window)无效<br>
+        $(document)无效<br>
+        $('body')无效<br>
+        $('html')这才有效<br>
+    </h2>
+    <h2>
+        Chrome浏览器：<br>
+        $(window)无效<br>
+        $(document)无效<br>
+        $('html')无效<br>
+        $('body')这才有效<br>
+    </h2>
+    <h2>
+        IE10浏览器：结果与Firefox一致
+    </h2>
+    <h2>
+        因此总结：$(obj).animate({scrollTop:0},700);平滑滚动到top的方式
+        对于$(window)、$(document)这两个JQ对象都是无效的，可能是因为animate中的scrollTop属性window和document都没有(?)
+        Firefox和IE10下 $('html')有效
+        Chrome下 $('body')有效
+        因此兼容的方式为：$('html,body').animate({scrollTop:0},700);
+    </h2>
+
+    <button>Top</button>
+
+</body>
+</html>
+<script>
+
+    $('button').click(function(event){
+        // $(window).animate({scrollTop:0},700);
+        // $(document).animate({scrollTop:0},700);
+        // $('html').animate({scrollTop:0},700);
+        // $('body').animate({scrollTop:0},700);
+        $('html,body').animate({scrollTop:0},700);
+    });
+
+</script>

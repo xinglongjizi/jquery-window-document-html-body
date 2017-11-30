@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$(window)/$(document)/$('html')/$('body')关于获取浏览器滚动条值的梗</title>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        *{padding: 0;margin: 0;}
+        html,body{height:200%;background:#eee;text-align:center;}
+        h2{color:maroon;padding-bottom:12px;}
+    </style>
+</head>
+<body>
+
+
+    <h2>$(window)、$(document)、$('html')、$('body')永远是个梗</h2>
+    <h2>$(window) $(document) $('html') $('body')获取浏览器滚动条值 $(obj).scrollTop() </h2>
+    <h2>
+        firefox浏览器：window、document、'html'的scrollTop()返回值都是一致的；而'body'的始终为0
+    </h2>
+    <h2>
+        Chrome浏览器：window、document、'body'的的scrollTop()返回值都是一致的；而'html'的始终为0
+    </h2>
+    <h2>
+        IE10浏览器：结果与Firefox一致
+    </h2>
+    <h2>
+        因此总结：JQ获取浏览器竖向滚动条的值，兼容浏览器的方式有两种：
+        $(window).scrollTop();
+        $(document).scrollTop();
+    </h2>
+
+
+    <script>
+
+        $(window).scroll(function(event){
+            console.log( 'window-scrolltop: ' + $(window).scrollTop() );
+            console.log(  'document-scrolltop: ' + $(document).scrollTop() );
+            console.log(  'html-scrolltop: ' + $('html').scrollTop() );
+            console.log(  'body-scrolltop: ' + $('body').scrollTop() );
+        });
+
+        //var num = 0x70;
+        //alert( num );
+
+
+    </script>
+
+
+</body>
+</html>
